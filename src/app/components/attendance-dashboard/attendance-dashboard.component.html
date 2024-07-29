@@ -23,7 +23,7 @@
       <td>{{ row.checkIn | date : "yyyy-MM-dd HH:mm:ss" }}</td>
       <td>{{ row.presenceType }}</td>
       <td>{{ row.checkOut | date : "yyyy-MM-dd HH:mm:ss" }}</td>
-      <td>{{ row.photo }}</td>
+      <td><img [src]="row.photo" alt="Employee Photo" width="100" /></td>
       <td>
         <button
           class="btn btn-danger"
