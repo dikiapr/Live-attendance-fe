@@ -84,12 +84,16 @@
           </div>
           <div class="mb-3">
             <label for="presenceType" class="form-label">Presence Type</label>
-            <input
-              type="text"
+            <select
               formControlName="presenceType"
               class="form-control"
               id="presenceType"
-            />
+            >
+              <option value="On Time">On Time</option>
+              <option value="Permission">Permission</option>
+              <option value="Sick">Sick</option>
+              <option value="Late">Late</option>
+            </select>
           </div>
           <div class="mb-3">
             <label for="photo" class="form-label">Photo</label>

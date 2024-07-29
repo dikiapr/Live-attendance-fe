@@ -116,6 +116,10 @@ export class AttendanceDashboardComponent implements OnInit {
         let ref = document.getElementById('checkInModal');
         ref?.click(); // Close the modal
       });
+
+      this.checkInForm.reset();
+
+      this.resetPhoto();
     }
   }
 
