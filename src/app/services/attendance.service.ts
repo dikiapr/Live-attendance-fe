@@ -13,4 +13,8 @@ export class AttendanceService {
   getAttendance(): Observable<any> {
     return this.http.get<any>(this.baseUrl);
   }
+
+  checkoutEmployee(id: number): Observable<any> {
+    return this.http.patch<any>(`${this.baseUrl}/checkout/${id}`, {});
+  }
 }

@@ -20,12 +20,18 @@
   <tbody>
     <tr *ngFor="let row of attendanceData">
       <td>{{ row.employee.name }}</td>
-      <td>{{ row.checkIn }}</td>
+      <td>{{ row.checkIn | date : "yyyy-MM-dd HH:mm:ss" }}</td>
       <td>{{ row.presenceType }}</td>
-      <td>{{ row.checkOut }}</td>
+      <td>{{ row.checkOut | date : "yyyy-MM-dd HH:mm:ss" }}</td>
       <td>{{ row.photo }}</td>
       <td>
-        <button class="btn btn-danger">Check Out</button>
+        <button
+          class="btn btn-danger"
+          (click)="checkOutEmployee(row.id)"
+          [disabled]="row.checkOut"
+        >
+          Check Out
+        </button>
       </td>
     </tr>
   </tbody>
