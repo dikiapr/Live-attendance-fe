@@ -1,0 +1,40 @@
+<button
+  type="button"
+  data-bs-toggle="modal"
+  data-bs-target="#exampleModal"
+  class="btn btn-success mt-3 ms-3"
+>
+  Check In
+</button>
+<table class="table mt-3 ms-3">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Check In</th>
+      <th scope="col">presence Type</th>
+      <th scope="col">Check Out</th>
+      <th scope="col">Photo</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of attendanceData">
+      <td>{{ row.employee.name }}</td>
+      <td>{{ row.checkIn }}</td>
+      <td>{{ row.presenceType }}</td>
+      <td>{{ row.checkOut }}</td>
+      <td>{{ row.photo }}</td>
+      <td>
+        <button class="btn btn-danger">Check Out</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+></div>
