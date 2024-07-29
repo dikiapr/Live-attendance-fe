@@ -14,6 +14,10 @@ export class AttendanceService {
     return this.http.get<any>(this.baseUrl);
   }
 
+  postCheckIn(formData: FormData): Observable<any> {
+    return this.http.post<any>(this.baseUrl, formData);
+  }
+
   checkoutEmployee(id: number): Observable<any> {
     return this.http.patch<any>(`${this.baseUrl}/checkout/${id}`, {});
   }

@@ -1,7 +1,7 @@
 <button
   type="button"
   data-bs-toggle="modal"
-  data-bs-target="#exampleModal"
+  data-bs-target="#checkInModal"
   class="btn btn-success mt-3 ms-3"
 >
   Check In
@@ -44,3 +44,94 @@
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
 ></div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="checkInModal"
+  tabindex="-1"
+  aria-labelledby="checkInModalLabel"
+  aria-hidden="true"
+  #checkInModal
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="checkInModalLabel">Check In</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="checkInForm">
+          <div class="mb-3">
+            <label for="employeeName" class="form-label">Employee Name</label>
+            <select
+              formControlName="employeeId"
+              class="form-control"
+              id="employeeName"
+            >
+              <option
+                *ngFor="let employee of employeeData"
+                [value]="employee.id"
+              >
+                {{ employee.name }}
+              </option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="presenceType" class="form-label">Presence Type</label>
+            <input
+              type="text"
+              formControlName="presenceType"
+              class="form-control"
+              id="presenceType"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="photo" class="form-label">Photo</label>
+            <div class="width: 100%" *ngIf="!webcamImage">
+              <webcam
+                [trigger]="triggerObservable"
+                (imageCapture)="handleImage($event)"
+                [width]="320"
+                [height]="240"
+              ></webcam>
+            </div>
+            <div *ngIf="webcamImage">
+              <img width="320" [src]="webcamImage.imageAsDataUrl" />
+            </div>
+            <button
+              type="button"
+              class="btn btn-info"
+              (click)="triggerSnapshot()"
+              [disabled]="isCaptureButtonDisabled"
+            >
+              Capture Photo
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger"
+              (click)="resetPhoto()"
+              *ngIf="webcamImage"
+              [disabled]="!isResetButtonEnabled"
+            >
+              Reset Photo
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary" (click)="submitCheckIn()">
+          Check In
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
