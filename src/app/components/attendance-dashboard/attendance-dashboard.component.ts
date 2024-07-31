@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AttendanceService } from '../../services/attendance.service';
 import { DatePipe } from '@angular/common';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { WebcamImage } from 'ngx-webcam';
 import { Observable, Subject } from 'rxjs';
 import { EmployeeService } from '../../services/employee.service';
+import { MapComponent } from '../map/map.component';
 
 @Component({
   selector: 'app-attendance-dashboard',
@@ -13,6 +14,8 @@ import { EmployeeService } from '../../services/employee.service';
   providers: [DatePipe],
 })
 export class AttendanceDashboardComponent implements OnInit {
+  @ViewChild(MapComponent) mapComponent!: MapComponent;
+
   attendanceData: any[] = [];
   employeeData: any[] = [];
   checkInForm: FormGroup;
@@ -102,6 +105,15 @@ export class AttendanceDashboardComponent implements OnInit {
     this.isResetButtonEnabled = false;
   }
 
+  resetLocation(): void {
+    this.checkInForm.patchValue({
+      location: '',
+    });
+    if (this.mapComponent) {
+      this.mapComponent.removeMarker();
+    }
+  }
+
   submitCheckIn() {
     if (this.checkInForm.valid) {
       const formData = new FormData();
@@ -126,14 +138,17 @@ export class AttendanceDashboardComponent implements OnInit {
       });
 
       this.checkInForm.reset();
-
       this.resetPhoto();
+      this.resetLocation();
     }
   }
 
   closeModal() {
     const closeModalButton = document.getElementById('closeModalButton');
     if (closeModalButton) {
+      this.checkInForm.reset();
+      this.resetPhoto();
+      this.resetLocation();
       closeModalButton.click();
     }
   }

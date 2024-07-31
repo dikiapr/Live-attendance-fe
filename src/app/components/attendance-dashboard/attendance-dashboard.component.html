@@ -134,11 +134,16 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+          (click)="closeModal()"
+        >
+          Cancel
         </button>
         <button type="button" class="btn btn-primary" (click)="submitCheckIn()">
-          Check In
+          Submit
         </button>
       </div>
     </div>

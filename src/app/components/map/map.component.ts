@@ -14,7 +14,7 @@ export interface Marker {
 })
 export class MapComponent implements OnInit {
   private map!: L.Map;
-  private currentMarker!: L.Marker;
+  private currentMarker?: L.Marker;
 
   @Output() locationChange = new EventEmitter<string>();
 
@@ -53,5 +53,12 @@ export class MapComponent implements OnInit {
       .addTo(this.map)
       .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
       .openPopup();
+  }
+
+  removeMarker(): void {
+    if (this.currentMarker) {
+      this.map.removeLayer(this.currentMarker);
+      this.currentMarker = undefined; // Clear the current marker reference
+    }
   }
 }
