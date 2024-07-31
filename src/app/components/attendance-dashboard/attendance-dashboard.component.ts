@@ -31,12 +31,20 @@ export class AttendanceDashboardComponent implements OnInit {
       employeeId: [''],
       presenceType: [''],
       photo: [''],
+      location: [''], // Ensure this field is present
     });
   }
 
   ngOnInit(): void {
     this.getAllAttendance();
     this.getAllEmployees();
+  }
+
+  onLocationChange(locationString: string): void {
+    console.log('Location received:', locationString); // Debug log
+    this.checkInForm.patchValue({
+      location: locationString, // Set lokasi dalam format string
+    });
   }
 
   getAllEmployees() {
@@ -102,6 +110,7 @@ export class AttendanceDashboardComponent implements OnInit {
         'presenceType',
         this.checkInForm.get('presenceType')?.value
       );
+      formData.append('location', this.checkInForm.get('location')?.value);
 
       if (this.checkInForm.get('photo')?.value) {
         formData.append(
@@ -113,13 +122,19 @@ export class AttendanceDashboardComponent implements OnInit {
 
       this.attendanceService.postCheckIn(formData).subscribe((response) => {
         this.getAllAttendance();
-        let ref = document.getElementById('checkInModal');
-        ref?.click(); // Close the modal
+        this.closeModal();
       });
 
       this.checkInForm.reset();
 
       this.resetPhoto();
+    }
+  }
+
+  closeModal() {
+    const closeModalButton = document.getElementById('closeModalButton');
+    if (closeModalButton) {
+      closeModalButton.click();
     }
   }
 

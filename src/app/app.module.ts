@@ -8,12 +8,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AttendanceDashboardComponent } from './components/attendance-dashboard/attendance-dashboard.component';
 import { WebcamModule } from 'ngx-webcam';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { MapComponent } from './components/map/map.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EmployeeDashboardComponent,
     AttendanceDashboardComponent,
+    MapComponent,
   ],
   imports: [
     BrowserModule,
@@ -21,6 +24,7 @@ import { WebcamModule } from 'ngx-webcam';
     ReactiveFormsModule,
     HttpClientModule,
     WebcamModule,
+    LeafletModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

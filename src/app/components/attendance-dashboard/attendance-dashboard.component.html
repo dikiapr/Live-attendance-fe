@@ -63,6 +63,7 @@
           class="btn-close"
           data-bs-dismiss="modal"
           aria-label="Close"
+          id="closeModalButton"
         ></button>
       </div>
       <div class="modal-body">
@@ -95,8 +96,8 @@
               <option value="Late">Late</option>
             </select>
           </div>
-          <div class="mb-3">
-            <label for="photo" class="form-label">Photo</label>
+          <div class="mb-3 text-center">
+            <label for="photo" class="form-label">Take your photo</label>
             <div class="width: 100%" *ngIf="!webcamImage">
               <webcam
                 [trigger]="triggerObservable"
@@ -125,6 +126,10 @@
             >
               Reset Photo
             </button>
+          </div>
+          <div class="mb-3 text-center">
+            <label for="location" class="form-label">Current location</label>
+            <app-map (locationChange)="onLocationChange($event)"></app-map>
           </div>
         </form>
       </div>
